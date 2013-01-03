@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snap</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class='navbar'>
+	<div class='navbar-inner'>
+		<ul class='nav'>
+			<li> <%= link_to 'Inicio', root_path %></li>
+			<li><%= link_to 'Posts', posts_path %></li>
+			<% if current_user %>
+				<li> <%= link_to 'Nuevo Artículo', new_post_path %> </li>
+				<li> <%= link_to "Log out #{current_user.username}", logout_path %> </li>
+				<li> <%= link_to 'Editar usuario', edit_usuario_path(current_user) %> </li>
+				<li> <%= link_to 'Mis Posts', mis_posts_path() %> </li>
+			<% else %>
+				<li><%= link_to 'Log in', login_path %></li>
+				<li><%= link_to 'Registrate', register_path %></li>
+			<% end %>
+		</ul>
+	</div>
+</nav>
+<div class="flash">
+    <%- if !notice.nil? -%>
+    	<p id="notice"><%= notice %></p>
+    <%- end -%> 
+    <%- if !alert.nil? -%>
+    	<p class="alert"><%= alert %></p>
+    <%- end -%>     
+</div>
+<%= yield %>
+
+</body>
+</html>
